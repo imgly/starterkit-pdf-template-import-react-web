@@ -3,7 +3,7 @@
 Transform PDF documents into editable CE.SDK designs. Text, vector paths, embedded images, colors and gradients are preserved. Built with [CE.SDK](https://img.ly/creative-sdk) by [IMG.LY](https://img.ly), runs entirely in the browser with no server dependencies.
 
 <p>
-  <a href="https://img.ly/docs/cesdk/js/starterkits/pdf-template-import-pdf01/">Documentation</a>
+  <a href="https://img.ly/docs/cesdk/js/starterkits/pdf-template-import-pdf001/">Documentation</a>
 </p>
 
 ![PDF Template Import starter kit showing the upload interface](./hero.webp)
@@ -119,7 +119,7 @@ src/
 
 ## Prerequisites
 
-- **Node.js v20+** with npm – [Download](https://nodejs.org/)
+- **Node.js v22+** with npm – [Download](https://nodejs.org/)
 - **Supported browsers** – Chrome 114+, Edge 114+, Firefox 115+, Safari 15.6+
 
 ## Troubleshooting
