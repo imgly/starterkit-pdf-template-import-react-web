@@ -33,7 +33,18 @@
 
 import CreativeEngine from '@cesdk/engine';
 import { PDFParser, addGfontsAssetLibrary } from '@imgly/pdf-importer';
-import type { LogMessage } from '@imgly/pdf-importer';
+
+/**
+ * A message the parser reports about content it could not import faithfully.
+ */
+export interface ImportMessage {
+  /** Stable identifier of the message */
+  code: string;
+  /** Severity of the message */
+  type: 'error' | 'warning' | 'info';
+  /** Human-readable text */
+  message: string;
+}
 
 /**
  * Configuration options for PDF import.
@@ -58,7 +69,7 @@ export interface PdfImportResult {
   /** Object URL for the scene archive */
   sceneArchiveUrl: string;
   /** Messages from the PDF parser (warnings, errors) */
-  messages: LogMessage[];
+  messages: ImportMessage[];
   /** Original file name */
   fileName: string;
 }
