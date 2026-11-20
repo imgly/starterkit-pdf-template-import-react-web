@@ -54,10 +54,6 @@ export interface PdfImportConfig {
   license?: string;
   /** Base URL for CE.SDK assets (for local development) */
   baseURL?: string;
-  /** Target width for preview image (default: 1000) */
-  previewWidth?: number;
-  /** Target height for preview image (default: 1000) */
-  previewHeight?: number;
 }
 
 /**
@@ -80,7 +76,7 @@ export interface PdfImportResult {
  * This function:
  * 1. Initializes a headless CreativeEngine instance
  * 2. Parses the PDF file using @imgly/pdf-importer
- * 3. Exports a preview image
+ * 3. Creates a preview image, which does not count as an export
  * 4. Saves the scene as an archive
  * 5. Returns URLs and parser messages
  *
@@ -103,12 +99,7 @@ export async function importPdfFile(
   fileName: string,
   config: PdfImportConfig = {}
 ): Promise<PdfImportResult> {
-  const {
-    license,
-    baseURL,
-    previewWidth = 1000,
-    previewHeight = 1000
-  } = config;
+  const { license, baseURL } = config;
 
   let engine: CreativeEngine | null = null;
 
@@ -142,12 +133,8 @@ export async function importPdfFile(
       throw new Error('No pages found in PDF file');
     }
 
-    // Export preview image
-    const imageBlob = await engine.block.export(firstPage, {
-      mimeType: 'image/png',
-      targetWidth: previewWidth,
-      targetHeight: previewHeight
-    });
+    // A preview does not count as an export, unlike `engine.block.export`.
+    const imageBlob = await engine.block.exportPreview(firstPage);
 
     // Save the scene as an archive
     const sceneArchive = await engine.scene.saveToArchive();
